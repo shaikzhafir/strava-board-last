@@ -1,0 +1,437 @@
+:root {
+  --brand: #fc4c02;
+  --fg: #111;
+  --fg-muted: #6b7280;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 10px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+h2 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.75rem;
+}
+h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+.page.center {
+  text-align: center;
+  padding-top: 6rem;
+}
+.muted {
+  color: var(--fg-muted);
+}
+.error {
+  background: #fee;
+  color: #900;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.athlete {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.linklike {
+  background: none;
+  border: none;
+  color: var(--brand);
+  cursor: pointer;
+  padding: 0 0 0 0.5rem;
+  font-size: inherit;
+}
+.linklike:disabled {
+  color: var(--fg-muted);
+  cursor: wait;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  background: var(--card);
+}
+.btn.primary {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+.stat-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.stat-label {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+.stat-sub {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* --- Activity heatmap (GitHub-style) --- */
+.heatmap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem 1.25rem;
+  margin-top: 1rem;
+  position: relative;
+}
+.heatmap-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.heatmap-title {
+  font-size: 1rem;
+  color: var(--fg);
+  font-weight: 600;
+  margin: 0;
+}
+.heatmap-sub {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  margin: 0.15rem 0 0;
+}
+.heatmap-years {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.heatmap-year {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--fg);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.2;
+}
+.heatmap-year:hover {
+  background: #f6f8fa;
+}
+.heatmap-year.active {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+.heatmap-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+.heatmap-inner {
+  display: inline-block;
+  min-width: max-content;
+}
+.heatmap-months {
+  display: grid;
+  grid-auto-flow: column;
+  margin-left: 30px;
+  height: 16px;
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  gap: 3px;
+}
+.heatmap-month {
+  white-space: nowrap;
+}
+.heatmap-body {
+  display: flex;
+  gap: 4px;
+}
+.heatmap-days {
+  display: grid;
+  grid-template-rows: repeat(7, 11px);
+  row-gap: 3px;
+  width: 26px;
+  font-size: 0.65rem;
+  color: var(--fg-muted);
+  line-height: 11px;
+}
+.heatmap-days span {
+  grid-column: 1;
+}
+.heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 11px);
+  column-gap: 3px;
+  row-gap: 3px;
+}
+.heatmap-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #ebedf0;
+  box-shadow: inset 0 0 0 1px rgba(27, 31, 35, 0.06);
+  cursor: default;
+}
+.heatmap-cell:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+.heatmap-cell.hidden {
+  visibility: hidden;
+}
+.heatmap-cell.future {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(27, 31, 35, 0.04);
+}
+.heatmap-cell.tier-0 {
+  background: #ebedf0;
+}
+.heatmap-cell.tier-1 {
+  background: #ffd7c2;
+}
+.heatmap-cell.tier-2 {
+  background: #fc8a4c;
+}
+.heatmap-cell.tier-3 {
+  background: #e34d0a;
+}
+.heatmap-cell.tier-4 {
+  background: #8a2f08;
+}
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  justify-content: flex-end;
+}
+.heatmap-legend .heatmap-cell {
+  cursor: default;
+}
+
+/* Floating tooltip (follows the hovered/focused cell) */
+.heatmap-tip {
+  position: fixed;
+  transform: translate(-50%, calc(-100% - 8px));
+  background: #24292f;
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.heatmap-tip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #24292f;
+}
+
+/* --- Setup wizard --- */
+.setup {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+.setup-header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.setup-steps {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.setup-steps > li {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+}
+.setup-steps h3 {
+  color: var(--fg);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+.setup-steps p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+.copy-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+.copy-row code {
+  flex: 1;
+  background: #f3f4f6;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.btn.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+.small {
+  font-size: 0.85rem;
+}
+.setup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+.setup-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+}
+.setup-form input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: white;
+  color: var(--fg);
+}
+.setup-form input:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: -1px;
+  border-color: var(--brand);
+}
+.setup-form .btn {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+.setup-form .btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.setup-footer {
+  margin-top: 2rem;
+}
+.setup-footer details summary {
+  cursor: pointer;
+}
+.setup-footer code {
+  background: #f3f4f6;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+/* --- Admin auth gate --- */
+.admin-auth {
+  max-width: 420px;
+  margin: 3rem auto 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+.admin-auth-header h1 {
+  font-size: 1.35rem;
+  margin-bottom: 0.35rem;
+}
+.admin-auth-header p {
+  margin: 0;
+  line-height: 1.5;
+}
+.admin-auth-form {
+  margin-top: 1.25rem;
+}
+.admin-auth-note {
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+.admin-auth-note code {
+  background: #f3f4f6;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
